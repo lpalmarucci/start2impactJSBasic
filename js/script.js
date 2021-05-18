@@ -89,7 +89,6 @@ function calc(op) {
 document.addEventListener("DOMContentLoaded", (e) => {
     drawElements(operations);
     document.getElementById("counterValue").textContent = 0;
-    drawAlert();
 })
 
 //gestione pulsanti con event delegation
