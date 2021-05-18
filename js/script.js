@@ -101,8 +101,8 @@ document.addEventListener('click', (e) => {
 //shortcut per resettare il counter
 document.onkeydown = (e) => {
     if(((e.ctrlKey || e.metaKey) && e.code === 'KeyE')){
-        document.getElementById("counterValue").textContent = 0;
         if(!alertShowInPage){
+            document.getElementById("counterValue").textContent = 0;
             drawAlert(e);
         }
     } else if(operations.join(' ').includes(e.key)){
