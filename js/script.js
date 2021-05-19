@@ -44,17 +44,10 @@ const drawAlert = (event) => {
     line.className = "line";
     alert.append(line);
     document.getElementById('container').append(alert);
-
-    
-    // line.style.height = "5px";
-    // line.style.backgroundColor = "rgb(184, 241, 255)";
-    // line.style.width = alert.clientWidth + 'px';
-    
     
     let coordsAlert = alert.getBoundingClientRect();
     alert.style.position = 'absolute';
-    alert.style.top = window.innerHeight - coordsAlert.height - 10 + 'px';
-    alert.style.left = window.innerWidth/2 - coordsAlert.width + "px";
+    alert.style.left = window.innerWidth/2 - coordsAlert.width/2 + "px";
 
     let timerEvent = new CustomEvent('timer');
     line.addEventListener('timer', () => {
@@ -71,7 +64,7 @@ const drawAlert = (event) => {
             line.dispatchEvent(timerEvent);
         } 
         line.style.width = width - 1 + "px";
-    }, 10);
+    }, 6);
 
 }
 
