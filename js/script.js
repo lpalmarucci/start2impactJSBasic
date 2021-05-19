@@ -47,6 +47,7 @@ const drawAlert = (event) => {
     
     let coordsAlert = alert.getBoundingClientRect();
     alert.style.position = 'absolute';
+    alert.style.top = window.innerHeight - coordsAlert.height - 10 - 10+ 'px';
     alert.style.left = window.innerWidth/2 - coordsAlert.width/2 + "px";
 
     let timerEvent = new CustomEvent('timer');
