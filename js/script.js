@@ -42,14 +42,11 @@ const drawAlert = (event) => {
     line.className = "line";
     alert.append(line);
     document.getElementById('container').append(alert);
-    
-    // window.alert(window.innerWidth)
 
     let coordsAlert = alert.getBoundingClientRect();
     alert.style.position = 'absolute';
     alert.style.top = window.innerHeight - coordsAlert.height + 'px';
     alert.style.left = window.innerWidth/2 - coordsAlert.width/2 + "px";
-    // alert.style.left = window.pageYOffset - coordsAlert.width/2 + "px";
 
     let timerEvent = new CustomEvent('timer');
     line.addEventListener('timer', () => {
@@ -73,10 +70,19 @@ const drawAlert = (event) => {
 function calc(op) {
     let valueElem = document.getElementById('counterValue');
     let cur_val = parseInt(valueElem.textContent);
-    if(op === '+'){
-        valueElem.textContent = cur_val + 1;
-    } else{
-        valueElem.textContent = cur_val - 1;        
+    switch(op){
+        case '+':
+            valueElem.textContent = cur_val + 1;
+            break;
+        case '-':
+            valueElem.textContent = cur_val - 1;    
+            break;
+
+        //In caso si dovessero aggiungere nuove operazioni
+        default:
+            console.error('Operation not supported');
+            break;
+
     }
 }
 
@@ -93,7 +99,7 @@ document.addEventListener('click', (e) => {
     calc(op);
 })
 
-//shortcut per resettare il counter
+//Premere CTRL + E per resettare il counter
 document.onkeydown = (e) => {
     if(((e.ctrlKey || e.metaKey) && e.code === 'KeyE')){
         if(!alertShowInPage){
