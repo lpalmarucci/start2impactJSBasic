@@ -1,28 +1,33 @@
-
 let interval;
+//Per evitare che vengano visualizzati più alert in pagina
 let alertShowInPage = false;
-let operations = ['-','+'];
+//Oggetto operazioni
+let operations = {
+    '+' : (val, numToSum = 1) => {
+        return val + numToSum;
+    },
+    '-' : (val, numToSum = 1) => {
+        return val - numToSum;
+    },
+}
 
-const drawElements = function(operations){
+const drawElements = function(){
     const container = document.getElementById('container');
+    //Creazione counter
     let span = document.createElement('span');
     span.setAttribute('id','counterValue');
-    span.addEventListener('dblclick', function(e){
-        e.preventDefault();
-        this.innerText = 0;
-    })
     container.append(span);
 
     let wrapperButtons = document.createElement('div');
     wrapperButtons.setAttribute('id','buttonsContainer');
 
-    for(let op of operations){
+    //Creo un pulsante per ogni operazione trovata
+    for(let op of Object.keys(operations)){
         let btn = document.createElement('button');
         btn.setAttribute('data-operation',op);
         btn.innerText = op;
         wrapperButtons.append(btn);
     }
-
     container.append(wrapperButtons);
 }
 
@@ -48,15 +53,17 @@ const drawAlert = (event) => {
     alert.style.top = window.innerHeight - coordsAlert.height - 10 + 'px';
     alert.style.left = window.innerWidth/2 - coordsAlert.width/2 + "px";
 
-    let timerEvent = new CustomEvent('timer');
-    line.addEventListener('timer', () => {
+    let timerEvent = new CustomEvent('timerExpired');
+    line.addEventListener('timerExpired', () => {
         document.getElementById('alert').style.opacity = 0;
         clearInterval(interval);
         alertShowInPage = false;
-        setTimeout(() => document.getElementById('alert').remove(), 400);
+        document.getElementById('alert').remove()
+        //Per permettere l'animazione dell'alert
+        setTimeout(() => document.getElementById('alert').remove(),400);
     })
 
-    const timer = setInterval(() => {
+    let timer = setInterval(() => {
         let width = line.getBoundingClientRect().width;
         if(width - 1 <= 0){
             interval = timer;
@@ -70,25 +77,11 @@ const drawAlert = (event) => {
 function calc(op) {
     let valueElem = document.getElementById('counterValue');
     let cur_val = parseInt(valueElem.textContent);
-    switch(op){
-        case '+':
-            valueElem.textContent = cur_val + 1;
-            break;
-        case '-':
-            valueElem.textContent = cur_val - 1;    
-            break;
-
-        //In caso si dovessero aggiungere nuove operazioni
-        default:
-            console.error('Operation not supported');
-            break;
-
-    }
+    valueElem.textContent = operations[op](cur_val);
 }
 
-
 document.addEventListener("DOMContentLoaded", (e) => {
-    drawElements(operations);
+    drawElements();
     document.getElementById("counterValue").textContent = 0;
 })
 
