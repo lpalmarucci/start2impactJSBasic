@@ -106,11 +106,11 @@ document.onkeydown = (e) => {
 }
 
 window.onresize = (e) => {
-    console.log(e);
-    if(!document.getElementById('alert')) return;
+    //se l'alert non è disegnato non proseguo
+    if(!alertShowInPage) return;
     let alert = document.getElementById('alert');
     let coordsAlert = alert.getBoundingClientRect();
     alert.style.position = "absolute";
-    // alert.style.top = e.target.innerHeight + "px";
-    // alert.style.left = e.target.innerWidth/2 + "px";
+    alert.style.top = window.innerHeight - coordsAlert.height + 'px';
+    alert.style.left = e.target.innerWidth/2 - coordsAlert.width/2 + "px";
 }
