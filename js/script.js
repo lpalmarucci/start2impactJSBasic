@@ -43,10 +43,12 @@ const drawAlert = (event) => {
     alert.append(line);
     document.getElementById('container').append(alert);
     
+    // window.alert(window.innerWidth)
+
     let coordsAlert = alert.getBoundingClientRect();
     alert.style.position = 'absolute';
     alert.style.top = window.innerHeight - coordsAlert.height + 'px';
-    alert.style.left = window.innerWidth/2 - coordsAlert.width + "px";
+    alert.style.left = window.innerWidth/2 - coordsAlert.width/2 + "px";
     // alert.style.left = window.pageYOffset - coordsAlert.width/2 + "px";
 
     let timerEvent = new CustomEvent('timer');
@@ -104,9 +106,11 @@ document.onkeydown = (e) => {
 }
 
 window.onresize = (e) => {
+    console.log(e);
     if(!document.getElementById('alert')) return;
     let alert = document.getElementById('alert');
     let coordsAlert = alert.getBoundingClientRect();
-    alert.style.top = e.clientHeight - coordsAlert.height + "px";
-    alert.style.left = e.clientWidth - coordsAlert.width + "px";
+    alert.style.position = "absolute";
+    // alert.style.top = e.target.innerHeight + "px";
+    // alert.style.left = e.target.innerWidth/2 + "px";
 }
