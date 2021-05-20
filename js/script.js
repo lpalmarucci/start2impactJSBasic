@@ -6,8 +6,8 @@ let operations = {
     '+' : (val, numToSum = 1) => {
         return val + numToSum;
     },
-    '-' : (val, numToSum = 1) => {
-        return val - numToSum;
+    '-' : (val, numToSub = 1) => {
+        return val - numToSub;
     },
 }
 
