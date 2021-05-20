@@ -36,8 +36,6 @@ const drawAlert = (event) => {
     let span = document.createElement('span');
     span.textContent = 'Counter resetted';
     span.classList.add('text-alert');
-    // span.style.padding = "10px";
-    // span.height = "30px";
     alert.append(span);
 
     let line = document.createElement('div');
@@ -47,8 +45,9 @@ const drawAlert = (event) => {
     
     let coordsAlert = alert.getBoundingClientRect();
     alert.style.position = 'absolute';
-    alert.style.top = window.innerHeight - coordsAlert.height - 10 - 10+ 'px';
-    alert.style.left = window.innerWidth/2 - coordsAlert.width/2 + "px";
+    alert.style.top = window.innerHeight - coordsAlert.height + 'px';
+    alert.style.left = window.innerWidth/2 - coordsAlert.width + "px";
+    // alert.style.left = window.pageYOffset - coordsAlert.width/2 + "px";
 
     let timerEvent = new CustomEvent('timer');
     line.addEventListener('timer', () => {
@@ -102,12 +101,12 @@ document.onkeydown = (e) => {
     } else if(operations.join(' ').includes(e.key)){
         calc(e.key);
     }
-
-
-    // if(!((e.ctrlKey || e.metaKey) && e.code === 'KeyE')) return;
-    // document.getElementById("counterValue").textContent = 0;
-    // if(!alertShowInPage){
-    //     drawAlert(e);
-    // }
 }
 
+window.onresize = (e) => {
+    if(!document.getElementById('alert')) return;
+    let alert = document.getElementById('alert');
+    let coordsAlert = alert.getBoundingClientRect();
+    alert.style.top = e.clientHeight - coordsAlert.height + "px";
+    alert.style.left = e.clientWidth - coordsAlert.width + "px";
+}
