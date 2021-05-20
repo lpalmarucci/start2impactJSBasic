@@ -3,12 +3,12 @@ let interval;
 let alertShowInPage = false;
 //Oggetto operazioni
 let operations = {
-    '+' : (val, numToSum = 1) => {
-        return val + numToSum;
-    },
     '-' : (val, numToSub = 1) => {
         return val - numToSub;
     },
+    '+' : (val, numToSum = 1) => {
+        return val + numToSum;
+    }
 }
 
 const drawElements = function(){
@@ -24,6 +24,7 @@ const drawElements = function(){
     //Creo un pulsante per ogni operazione trovata
     for(let op of Object.keys(operations)){
         let btn = document.createElement('button');
+        //Per sapere che operazione eseguire al click del pulsante
         btn.setAttribute('data-operation',op);
         btn.innerText = op;
         wrapperButtons.append(btn);
@@ -48,30 +49,31 @@ const drawAlert = (event) => {
     alert.append(line);
     document.getElementById('container').append(alert);
 
+    //posizionamento alert al fondo (alzato di 10 pixel) e al centro della pagina
     let coordsAlert = alert.getBoundingClientRect();
     alert.style.position = 'absolute';
     alert.style.top = window.innerHeight - coordsAlert.height - 10 + 'px';
     alert.style.left = window.innerWidth/2 - coordsAlert.width/2 + "px";
 
+    //Gestione animazione a scomparsa con il setInterval + CustomEvent
     let timerEvent = new CustomEvent('timerExpired');
     line.addEventListener('timerExpired', () => {
         document.getElementById('alert').style.opacity = 0;
         clearInterval(interval);
+        //Posso permettere di disegnare un altro alert
         alertShowInPage = false;
-        document.getElementById('alert').remove()
         //Per permettere l'animazione dell'alert
         setTimeout(() => document.getElementById('alert').remove(),400);
     })
 
-    let timer = setInterval(() => {
+    let timerInterval = setInterval(() => {
         let width = line.getBoundingClientRect().width;
-        if(width - 1 <= 0){
-            interval = timer;
+        if(width - 1 === 0){
+            interval = timerInterval;
             line.dispatchEvent(timerEvent);
         } 
-        line.style.width = width - 1 + "px";
+        line.style.width =  `${width - 1}px`;
     }, 6);
-
 }
 
 function calc(op) {
@@ -85,11 +87,10 @@ document.addEventListener("DOMContentLoaded", (e) => {
     document.getElementById("counterValue").textContent = 0;
 })
 
-//gestione pulsanti con event delegation
+//gestione click pulsanti con event delegation
 document.addEventListener('click', (e) => {
     if(e.target.tagName.toLowerCase() !== 'button') return;
-    let op = e.target.dataset.operation;
-    calc(op);
+    calc(e.target.dataset.operation);
 })
 
 //Premere CTRL + E per resettare il counter
