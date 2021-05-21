@@ -13,7 +13,7 @@
 <details open="open">
   <summary>Summary</summary>
   <ol>
-    <li><a href="#counter">Counter</a></li>
+    <li><a href="#counter">Descrizione</a></li>
     <li><a href="#shortcut">Shortcut</a></li>
   </ol>
 </details>
@@ -21,12 +21,12 @@
 
 
 <!-- COUNTER -->
-## counter
+## Counter
 
-2 bottoni (+/-) per incrementare/decrementare il valore
+Semplice progetto che incrementa/decrementa di 1 il valore (inizialmente 0) tramite 2 pulsanti.(+/-).
 
 <!-- SHORTCUT -->
-## shortcut
+## Shortcut
 
 Possibilità di utilizzare le shortcut
 
