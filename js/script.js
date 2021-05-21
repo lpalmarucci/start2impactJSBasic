@@ -95,7 +95,7 @@ document.addEventListener('click', (e) => {
 
 //Premere CTRL + E per resettare il counter
 document.onkeydown = (e) => {
-    if(((e.ctrlKey || e.metaKey) && e.code === 'KeyE')){
+    if(((e.ctrlKey || e.metaKey) && e.code === 'KeyE') || e.key === '0' ){
         if(!alertShowInPage){
             document.getElementById("counterValue").textContent = 0;
             drawAlert(e);
