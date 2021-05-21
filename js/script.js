@@ -32,7 +32,7 @@ const drawElements = function(){
     container.append(wrapperButtons);
 }
 
-const drawAlert = (event) => {
+const drawAlert = () => {
     alertShowInPage = true;
 
     //creating alert
