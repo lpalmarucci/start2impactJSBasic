@@ -100,7 +100,7 @@ document.onkeydown = (e) => {
             document.getElementById("counterValue").textContent = 0;
             drawAlert(e);
         }
-    } else if(operations.join(' ').includes(e.key)){
+    } else if(Object.keys(operations).join(' ').includes(e.key)){
         calc(e.key);
     }
 }
