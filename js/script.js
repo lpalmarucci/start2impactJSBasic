@@ -3,12 +3,8 @@ let interval;
 let alertShowInPage = false;
 //Oggetto operazioni
 let operations = {
-    '-' : (val, numToSub = 1) => {
-        return val - numToSub;
-    },
-    '+' : (val, numToSum = 1) => {
-        return val + numToSum;
-    }
+    '-' : (val, numToSub = 1) =>  val - numToSub,
+    '+' : (val, numToSum = 1) =>  val + numToSum
 }
 
 const drawElements = function(){
@@ -105,6 +101,7 @@ document.onkeydown = (e) => {
     }
 }
 
+//Riposizionamento alert al resize della finestra
 window.onresize = (e) => {
     //se l'alert non è disegnato non proseguo
     if(!alertShowInPage) return;
